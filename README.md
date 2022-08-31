@@ -13,6 +13,7 @@
 </h4>
 <body>
 Go to config.json and enter the following:
+
 ```
 {
 	"token": "YOUR_TOKEN_HERE",
