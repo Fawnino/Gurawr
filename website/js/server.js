@@ -12,7 +12,7 @@ module.exports = (client) => {
     const users = client.users.cache.size;
     const guilds = client.guilds.cache.size;
 
-    let file = fs.readFileSync("./home.html", { encoding: "utf8" });
+    let file = fs.readFileSync("../html/home.html", { encoding: "utf8" });
     file = file.replace("$$ram$$", ram);
     file = file.replace("$$cores$$", cores);
     file = file.replace("$$cpu$$", cpu);
