@@ -90,12 +90,6 @@ module.exports = {
         (cmd) => cmd.aliases && cmd.aliases.includes(commandName)
       );
 
-    console.log(
-      `${message.author.username} used ${JSON.stringify(command)} in ${
-        guild.name
-      }`
-    );
-
     // If it's not a command, return :)
 
     if (!command) return;
@@ -212,5 +206,8 @@ module.exports = {
         embeds: [commandInteruppted],
       });
     }
+    console.log(
+      `Command Performed: ${command.name} by ${message.author.username}`
+    );
   },
 };
