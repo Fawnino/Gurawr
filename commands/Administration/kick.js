@@ -4,7 +4,7 @@ module.exports = {
   name: "kick",
   description: "kicks members from server",
   usage: "(member)",
-  permissions: "BAN_MEMBERS",
+  permissions: "KICK_MEMBERS",
   async execute(message, args, client) {
     const member = message.mentions.members.first();
 
