@@ -44,7 +44,7 @@ module.exports = {
         .send({ embeds: [helpEmbed] })
 
         .then(() => {
-          if (message.channel.type === ChannelType.DM) return;
+          if (message.channel.type === "dm") return;
 
           // On validation, reply back.
 
