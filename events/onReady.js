@@ -10,12 +10,11 @@ module.exports = {
   name: "ready",
   once: true,
   execute(client) {
-    const start = Date.now();
-    console.log(`Ready! Logged in as ${client.user.tag}`);
-    setInterval(() => {
-      const ms = Date.now() - start;
-      console.log(`Second elapsed: ${Math.floor(ms / 1000)}`);
-    }, 2000);
+    console.log(`Client has successfully booted-up! In ${client.guilds.cache.size} servers with ${client.users.cache.size} users!
+    A check will be performed in the Discord Server to ensure that it's running properly.`);
+
+    const guild = client.guilds.cache.get("1011104283237830758");
+    const channel = guild.channels.cache.get("1014471400658051102");
 
     const activities = [
       `${prefix}help | a.`,
@@ -31,15 +30,23 @@ module.exports = {
         }),
       15000
     );
-    const embed = new MessageEmbed()
-      .setTitle("Gura is now online!")
-      .setAuthor({ name: "Gura", iconURL: client.user.displayAvatarURL })
-      .addFields(
-        { name: "Guilds", value: `${client.guilds.cache.size}`, inline: true },
-        { name: "Users", value: `${client.users.cache.size}`, inline: true }
+
+    const check = new MessageEmbed()
+      .setTitle("Bot Restart Check")
+      .setDescription(
+        "The client has been restarted, please refer to the timestamp if it was you who started the bot. If it was someone else, immediately regenerate the client's token."
       )
-      .setColor("#ADD8E6")
-      .setTimestamp();
-    client.channels.cache.get("1014471400658051102").send({ embeds: [embed] });
+      .setColor("#fdfd96")
+      .setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
+      .setTimestamp()
+      .addFields(
+        { name: "Guilds:", value: `${client.guilds.cache.size}`, inline: true },
+        {
+          name: "Member Count:",
+          value: `${client.users.cache.size}`,
+          inline: true,
+        }
+      );
+    client.channels.cache.get("1014471400658051102").send({ embeds: [check] });
   },
 };

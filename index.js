@@ -7,7 +7,7 @@
 // Declare constants which will be used throughout the bot.
 
 const fs = require("fs");
-const { Client, Collection, Intents } = require("discord.js");
+const { Client, Collection, Intents, MessageEmbed } = require("discord.js");
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
 const {
@@ -18,7 +18,7 @@ const {
   prefix,
 } = require("./config.json");
 const serverport = require("./website/js/server");
-const MessageEmbed = require("discord.js");
+const { levelSys } = require("./util/features");
 
 /**
  * From v13, specifying the intents is compulsory.
@@ -235,35 +235,23 @@ for (const folder of triggerFolders) {
   }
 }
 
-const channelId = "1014108242370101290"; // welcome channel
-
-client.on("guildMemberAdd", (member) => {
-  const embed = new MessageEmbed()
-    .setAuthor(`${member.avatarURL}`)
-    .setTitle("New Member!")
-    .setDescription(
-      `Welcome <@${member.id}> to Gura\'s Support server! check out <#1014314167991291904> to see the rules`
+client.on("guildCreate", (guild) => {
+  const embed = new MessageEmbed();
+  console
+    .log(
+      `Invited to a Guild: ${guild.name} // Members: ${guild.memberCount} // ID: ${guild.id}`
     )
-    .setTimestamp()
-    .setFooter("Have fun and stay safe!");
-
-  const channel = member.guild.channels.cache.get(channelId);
-  channel.send({ embeds: [embed] });
-});
-
-const channelId1 = "1014108264658645012"; // leave channel
-
-client.on("guildMemberRemove", (member) => {
-  const leavembed = new MessageEmbed()
-    .setTitle("We lost a member...")
+    .setTitle("Hello World!")
     .setDescription(
-      `<@${member.id}> Left the server and decided to take another path. Hope he comes back again!`
+      "Hello! Aren't I such a great bot to be added here. My prefix is `g!` and get started by using `g!help`! Have fun using me."
     )
-    .setFooter("Stay Safe and have fun!")
     .setTimestamp();
-
-  const channel1 = member.guild.channels.cache.get(channelId1);
-  channel1.send({ embeds: [leavembed] });
+  guild.systemChannel.send({ embeds: [embed] }).catch((x) => x.return);
+});
+client.on("guildDelete", (guild) => {
+  console.log(
+    `Kicked from a Guild: ${guild.name} // Members: ${guild.memberCount} // ID: ${guild.id}`
+  );
 });
 serverport(client);
 client.login(token);
