@@ -5,21 +5,21 @@
  */
 
 module.exports = {
-	data: {
-		name: "sample",
-		type: 3, // 3 is for message context menus
-	},
+  data: {
+    name: "sample",
+    type: 3, // 3 is for message context menus
+  },
 
-	/**
-	 * @description Executes when the context option with name "sample" is clicked.
-	 * @author Krish Garg
-	 * @param {Object} interaction The Interaction Object of the command.
-	 */
+  /**
+   * @description Executes when the context option with name "sample" is clicked.
+   * @author Krish Garg
+   * @param {Object} interaction The Interaction Object of the command.
+   */
 
-	async execute(interaction) {
-		await interaction.reply({
-			content: "I am a sample message context menu.",
-		});
-		return;
-	},
+  async execute(interaction) {
+    await interaction.reply({
+      content: "I am a sample message context menu.",
+    });
+    return;
+  },
 };

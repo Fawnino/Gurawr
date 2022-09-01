@@ -1,47 +1,45 @@
-const {Client, Message, MessageEmbed} = require('discord.js')
-const axios = require('axios')
+const { Client, Message, MessageEmbed } = require("discord.js");
+const axios = require("axios");
 
 module.exports = {
-  name:"urban",
-  aliases: ['urbandictionary'],
-  description:'Looks Up Stuff on Urban Dictionary',
-  usage: '(query)',
+  name: "urban",
+  aliases: ["urbandictionary"],
+  description: "Looks Up Stuff on Urban Dictionary",
+  usage: "(query)",
   async execute(message, args, client) {
     let query = args.join(" ");
 
-    if(!query){
-      return message.channel.send('Please specify word to look up')
+    if (!query) {
+      return message.channel.send("Please specify word to look up");
     }
-    query = encodeURIComponent(query)
+    query = encodeURIComponent(query);
 
-    try{
-
-    const {
-      data: {list}
-    } = await axios.get(
-      `https://api.urbandictionary.com/v0/define?term=${query}`
+    try {
+      const {
+        data: { list },
+      } = await axios.get(
+        `https://api.urbandictionary.com/v0/define?term=${query}`
       );
-    const [answer] = list;
+      const [answer] = list;
 
-    const embed = new MessageEmbed()
-      .setTitle(answer.word)
-      .setURL(answer.permalink)
-      .setColor('RANDOM')
-      .addField('DEFINITION', trim(answer.definition))
-      .addField('EXAMPLE', trim(answer.example))
-      .addField(
-        "RATINGS",
-        `${answer.thumbs_up} 👍 || ${answer.thumbs_down} 👎`
-      )
+      const embed = new MessageEmbed()
+        .setTitle(answer.word)
+        .setURL(answer.permalink)
+        .setColor("RANDOM")
+        .addField("DEFINITION", trim(answer.definition))
+        .addField("EXAMPLE", trim(answer.example))
+        .addField(
+          "RATINGS",
+          `${answer.thumbs_up} 👍 || ${answer.thumbs_down} 👎`
+        );
 
-      return message.channel.send({embeds:[embed]});
-  } catch(err){
-    return message.channel.send("Word not found")
-  }
+      return message.channel.send({ embeds: [embed] });
+    } catch (err) {
+      return message.channel.send("Word not found");
+    }
+  },
+};
 
-}
-}
-
-function trim(input){
+function trim(input) {
   return input.length > 1024 ? `${input.slice(0, 1020)} ... ` : input;
 }

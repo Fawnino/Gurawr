@@ -10,9 +10,15 @@ const fs = require("fs");
 const { Client, Collection, Intents } = require("discord.js");
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
-const { token, client_id, test_guild_id, channelID, prefix } = require("./config.json");
-const serverport = require("./website/js/server")
-const MessageEmbed = require('discord.js')
+const {
+  token,
+  client_id,
+  test_guild_id,
+  channelID,
+  prefix,
+} = require("./config.json");
+const serverport = require("./website/js/server");
+const MessageEmbed = require("discord.js");
 
 /**
  * From v13, specifying the intents is compulsory.
@@ -229,33 +235,35 @@ for (const folder of triggerFolders) {
   }
 }
 
-const channelId = '1014108242370101290' // welcome channel
+const channelId = "1014108242370101290"; // welcome channel
 
-client.on('guildMemberAdd', (member) => {
+client.on("guildMemberAdd", (member) => {
   const embed = new MessageEmbed()
     .setAuthor(`${member.avatarURL}`)
-    .setTitle(
-      'New Member!'
+    .setTitle("New Member!")
+    .setDescription(
+      `Welcome <@${member.id}> to Gura\'s Support server! check out <#1014314167991291904> to see the rules`
     )
-    .setDescription(`Welcome <@${member.id}> to Gura\'s Support server! check out <#1014314167991291904> to see the rules`)
     .setTimestamp()
-    .setFooter('Have fun and stay safe!')
+    .setFooter("Have fun and stay safe!");
 
-  const channel = member.guild.channels.cache.get(channelId)
-  channel.send({ embeds: [embed] })
-})
+  const channel = member.guild.channels.cache.get(channelId);
+  channel.send({ embeds: [embed] });
+});
 
-const channelId1 = '1014108264658645012' // leave channel
+const channelId1 = "1014108264658645012"; // leave channel
 
-client.on('guildMemberRemove', (member) => {
+client.on("guildMemberRemove", (member) => {
   const leavembed = new MessageEmbed()
-    .setTitle('We lost a member...')
-    .setDescription(`<@${member.id}> Left the server and decided to take another path. Hope he comes back again!`)
-    .setFooter('Stay Safe and have fun!')
-    .setTimestamp()
+    .setTitle("We lost a member...")
+    .setDescription(
+      `<@${member.id}> Left the server and decided to take another path. Hope he comes back again!`
+    )
+    .setFooter("Stay Safe and have fun!")
+    .setTimestamp();
 
-  const channel1 = member.guild.channels.cache.get(channelId1)
-  channel1.send({ embeds: [leavembed] })
-})
-serverport(client)
-client.login(token)
+  const channel1 = member.guild.channels.cache.get(channelId1);
+  channel1.send({ embeds: [leavembed] });
+});
+serverport(client);
+client.login(token);

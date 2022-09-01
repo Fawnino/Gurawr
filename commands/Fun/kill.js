@@ -1,12 +1,13 @@
 module.exports = {
-    name:'kill',
-    description:'Kill another user(is for fun)',
-    usage: '(user)',
-    async execute(message, args, client){
-
-    if (!args[0]) return message.channel.send(`Wow, that was great..But who do I kill?`)
+  name: "kill",
+  description: "Kill another user(is for fun)",
+  usage: "(user)",
+  async execute(message, args, client) {
+    if (!args[0])
+      return message.channel.send(`Wow, that was great..But who do I kill?`);
     let userr = message.mentions.users.first() || message.author;
-    if (!userr) return message.channel.send(`Wow, that was great..But who do I kill?`)
+    if (!userr)
+      return message.channel.send(`Wow, that was great..But who do I kill?`);
     let user = userr.username;
     const answers = [
       `${message.author.username} sat on ${user}, as the other sadly *suffocated*`,
@@ -38,9 +39,11 @@ module.exports = {
       `${message.author.username} tried to push ${user} off a building but managed to land on 2 feet.`,
       `${user} died from emotional damage`,
       `${user} died because "she" didn't accept their feelings`,
-    ]
-    if (userr.id === message.author.id) return message.channel.send(`Are you Ok?`)
-    message.channel.send(`${answers[Math.floor(Math.random() * answers.length)]}`)
-
-    }
-}
+    ];
+    if (userr.id === message.author.id)
+      return message.channel.send(`Are you Ok?`);
+    message.channel.send(
+      `${answers[Math.floor(Math.random() * answers.length)]}`
+    );
+  },
+};

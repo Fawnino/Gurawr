@@ -5,7 +5,7 @@
  */
 
 // For now, the only available property is name array. Not making the name array will result in an error.
-const { MessageEmbed } = require('discord.js')
+const { MessageEmbed } = require("discord.js");
 
 module.exports = {
   name: ["hello"],
@@ -17,6 +17,5 @@ module.exports = {
    * @param {String[]} args The Message Content of the received message seperated by spaces (' ') in an array
    */
 
-  execute(message, args) {
-  },
+  execute(message, args) {},
 };

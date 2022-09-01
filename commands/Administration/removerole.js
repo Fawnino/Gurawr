@@ -1,26 +1,25 @@
-const Discord = require('discord.js')
+const Discord = require("discord.js");
 
 module.exports = {
-  name: 'removerole',
-  description: 'removes roles from users',
-  permissions: 'MANAGE_ROLES',
+  name: "removerole",
+  description: "removes roles from users",
+  permissions: "MANAGE_ROLES",
   args: 0,
   async execute(message, args, client) {
-
-    const target = message.mentions.members.first()
+    const target = message.mentions.members.first();
     if (!target) {
-      return message.channel.send({ content: "Please sepcify user" })
+      return message.channel.send({ content: "Please sepcify user" });
     }
-    const role = message.mentions.roles.first()
+    const role = message.mentions.roles.first();
 
     if (!role) {
-      return message.channel.send({ content: "Please specify role to give" })
+      return message.channel.send({ content: "Please specify role to give" });
     }
 
-    await target.roles.remove(role)
+    await target.roles.remove(role);
 
-    message.channel.send({ content: `${target.user.username} has had a role taken away` })
-
-  }
-
-}
+    message.channel.send({
+      content: `${target.user.username} has had a role taken away`,
+    });
+  },
+};
