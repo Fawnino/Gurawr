@@ -10,7 +10,8 @@ const fs = require("fs");
 const { Client, Collection, Intents, MessageEmbed } = require("discord.js");
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
-const { token, client_id, test_guild_id } = require("./config.json");
+const { client_id, test_guild_id } = require("./config.json");
+require("dotenv").config();
 const serverport = require("./website/js/server");
 
 /**
@@ -174,7 +175,7 @@ for (const module of selectMenus) {
 /**********************************************************************/
 // Registration of Slash-Commands in Discord API
 
-const rest = new REST({ version: "9" }).setToken(token);
+const rest = new REST({ version: "9" }).setToken(process.env.TOKEN);
 
 const commandJsonData = [
   ...Array.from(client.slashCommands.values()).map((c) => c.data.toJSON()),
@@ -247,4 +248,4 @@ client.on("guildDelete", (guild) => {
   );
 });
 serverport(client);
-client.login(token);
+client.login(process.env.TOKEN);
