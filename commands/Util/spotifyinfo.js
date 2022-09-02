@@ -1,11 +1,5 @@
 const axios = require("axios");
 const Discord = require("discord.js");
-const {
-  joinVoiceChannel,
-  createAudioPlayer,
-  createAudioResource,
-  NoSubscriberBehavior,
-} = require("@discordjs/voice");
 
 module.exports = {
   name: "spotifyinfo",

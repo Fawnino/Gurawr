@@ -10,15 +10,8 @@ const fs = require("fs");
 const { Client, Collection, Intents, MessageEmbed } = require("discord.js");
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
-const {
-  token,
-  client_id,
-  test_guild_id,
-  channelID,
-  prefix,
-} = require("./config.json");
+const { token, client_id, test_guild_id } = require("./config.json");
 const serverport = require("./website/js/server");
-const { levelSys } = require("./util/features");
 
 /**
  * From v13, specifying the intents is compulsory.
@@ -203,7 +196,7 @@ const commandJsonData = [
         Routes.applicationCommands(client_id)
        */
 
-      Routes.applicationCommands(client_id),
+      Routes.applicationGuildCommands(client_id, test_guild_id),
       { body: commandJsonData }
     );
 

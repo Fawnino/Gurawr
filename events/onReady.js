@@ -40,7 +40,11 @@ module.exports = {
       .setThumbnail(client.user.displayAvatarURL({ dynamic: true }))
       .setTimestamp()
       .addFields(
-        { name: "Guilds:", value: `${client.guilds.cache.size}`, inline: true },
+        {
+          name: "Guilds:",
+          value: `${client.guilds.cache.size}`,
+          inline: true,
+        },
         {
           name: "Member Count:",
           value: `${client.users.cache.size}`,
