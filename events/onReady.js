@@ -1,6 +1,6 @@
 const { MessageEmbed } = require("discord.js");
 const { version } = require("../package.json");
-const { prefix, channelOnlineMessage } = require("../config.json");
+const { channelOnlineMessage } = require("../config.json");
 /**
  * @file Ready Event File.
  * @author Naman Vrati
@@ -17,9 +17,9 @@ module.exports = {
     const channel = guild.channels.cache.get("1014471400658051102");
 
     const activities = [
-      `${prefix}help | a.`,
-      `${prefix}help | Version ${version}.`,
-      `${prefix}help | ${client.guilds.cache.size} server(s).`,
+      `$help | a.`,
+      `$help | Version ${version}.`,
+      `$help | ${client.guilds.cache.size} server(s).`,
     ];
 
     let i = 0;

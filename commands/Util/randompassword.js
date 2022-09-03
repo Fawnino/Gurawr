@@ -7,14 +7,14 @@ module.exports = {
     let possible =
       "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+";
     let passString;
-    let passWordLength = 20;
+    let passWordLength = 10;
     for (let i = 0; i < passWordLength; i++) {
       password.push(
         possible.charAt(Math.floor(Math.random() * possible.length))
       );
     }
     passString = password.join("");
-    console.log(client);
+    console.log(passString);
     message.author
       .send(passString)
 
