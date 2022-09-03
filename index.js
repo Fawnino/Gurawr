@@ -229,23 +229,5 @@ for (const folder of triggerFolders) {
   }
 }
 
-client.on("guildCreate", (guild) => {
-  const embed = new MessageEmbed();
-  console
-    .log(
-      `Invited to a Guild: ${guild.name} // Members: ${guild.memberCount} // ID: ${guild.id}`
-    )
-    .setTitle("Hello World!")
-    .setDescription(
-      "Hello! Aren't I such a great bot to be added here. My prefix is `$` and get started by using `g!help`! Have fun using me."
-    )
-    .setTimestamp();
-  guild.systemChannel.send({ embeds: [embed] }).catch((x) => x.return);
-});
-client.on("guildDelete", (guild) => {
-  console.log(
-    `Kicked from a Guild: ${guild.name} // Members: ${guild.memberCount} // ID: ${guild.id}`
-  );
-});
 serverport(client);
 client.login(process.env.TOKEN);
