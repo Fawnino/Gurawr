@@ -1,5 +1,4 @@
 const { prefix } = require("../../config.json");
-
 // Deconstructing EmbedBuilder to create embeds within this command
 const { ChannelType, MessageEmbed } = require("discord.js");
 
@@ -28,7 +27,7 @@ module.exports = {
         .setColor("RANDOM")
         .setTitle("List of all my commands")
         .setDescription(
-          "`" + commands.map((command) => command.name).join("`, `") + "`"
+          "```" + commands.map((command) => command.name).join(", ") + "```"
         )
 
         .addFields([
