@@ -11,7 +11,6 @@ const { Client, Collection, Intents, MessageEmbed } = require("discord.js");
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
 const { client_id, test_guild_id, token } = require("./config.json");
-const serverport = require("./website/js/server");
 
 /**
  * From v13, specifying the intents is compulsory.
@@ -228,5 +227,4 @@ for (const folder of triggerFolders) {
   }
 }
 
-serverport(client);
 client.login(token);
