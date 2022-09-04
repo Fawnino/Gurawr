@@ -83,7 +83,7 @@ module.exports = {
 
       // 🎉 Confirmation sent if reloading was successful!
       message.channel.send({
-        content: `Command \`${newCommand.name}\` was reloaded!`,
+        content: `:white_check_mark: | Command \`${newCommand.name}\` was reloaded!`,
       });
     } catch (error) {
       // Catch block executes if there is any error in your code. It logs the error in console and also sends back in discord GUI.
