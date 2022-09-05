@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const { Random } = require("something-random-on-discord");
 const anime = require("anime-actions");
 
@@ -22,9 +22,9 @@ module.exports = {
         return message.channel.send("Who Will U Kiss? 💗");
       }
 
-      let embed = new Discord.MessageEmbed()
+      let embed = new EmbedBuilder()
         .setImage(data)
-        .setColor("#2F3136")
+        .setColor(0x2f3136)
         .setTitle(
           `${message.author.username} kisses ${target.user.username} \ 💖`
         )

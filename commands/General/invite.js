@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
   name: "invite",
@@ -6,7 +6,7 @@ module.exports = {
   description: "Shows invite link for Bot",
   cooldown: 3,
   async execute(message) {
-    const inviteLink = new MessageEmbed()
+    const inviteLink = new EmbedBuilder()
       .setTitle("Inviting Gura to your server?")
       .setColor("#ADD8E6")
       .setDescription(

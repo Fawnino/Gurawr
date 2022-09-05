@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
   name: "kick",
@@ -21,7 +21,7 @@ module.exports = {
 
     let reason = args.slice(1).join(" ") || "No Reason";
 
-    const kickembed = new MessageEmbed()
+    const kickembed = new EmbedBuilder()
       .setTitle(`User Kicked`)
       .setDescription(`Reason: ${reason}`)
       .setTimestamp()

@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
   name: "advice",
@@ -8,12 +8,12 @@ module.exports = {
       "http://api.adviceslip.com/advice",
       function (error, response, body) {
         if (!error && response.statusCode == 200) {
-          const embed = new Discord.MessageEmbed()
-            .setColor("RANDOM")
+          const embed = new EmbedBuilder()
+            .setColor("Random")
             .setDescription(`*${JSON.parse(body).slip.advice}*`);
           message.channel.send({ embeds: [embed] });
         } else {
-          const embed = new Discord.MessageEmbed()
+          const embed = new EmbedBuilder()
             .setTitle("Oops.. An error")
             .setColor("RED")
             .setDescription(`**Advice:**\n\nI couldn't think of any advice..`)

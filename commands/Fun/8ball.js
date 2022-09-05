@@ -1,9 +1,8 @@
-const { MessageEmbed } = require("discord.js");
-const { name } = require("../../package.json");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
   name: "8ball",
-  description: `Ask a question to ${name}`,
+  description: `Ask a question to Gura`,
   usage: "<question>",
   cooldown: 3,
   execute(message, args) {
@@ -28,8 +27,8 @@ module.exports = {
     ];
     const response = answers[Math.floor(Math.random() * answers.length)];
 
-    const ball = new MessageEmbed()
-      .setColor("RANDOM")
+    const ball = new EmbedBuilder()
+      .setColor("Random")
       .setTitle(MessageArgs)
       .setDescription(`:8ball: ${response}`);
     message.channel.send({ embeds: [ball] });

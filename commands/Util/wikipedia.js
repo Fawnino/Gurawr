@@ -1,6 +1,6 @@
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
-const Discord = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
   name: "wikipedia",
@@ -27,8 +27,8 @@ module.exports = {
 
     try {
       if (response.type === "disambiguation") {
-        const embed = new Discord.MessageEmbed()
-          .setColor("RANDOM")
+        const embed = new EmbedBuilder()
+          .setColor("Random")
           .setTitle(response.title)
           .setURL(response.content_urls.desktop.page)
           .setDescription([
@@ -36,8 +36,8 @@ module.exports = {
           ]);
         return message.channel.send({ embeds: [embed] });
       } else {
-        const embed = new Discord.MessageEmbed()
-          .setColor("RANDOM")
+        const embed = new EmbedBuilder()
+          .setColor("Random")
           .setTitle(response.title)
           .setThumbnail(response.thumbnail.source)
           .setURL(response.content_urls.desktop.page)

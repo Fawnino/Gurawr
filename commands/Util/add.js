@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js"); // You can copy this line if you want to use message embeds in discord.
+const { EmbedBuilder } = require("discord.js"); // You can copy this line if you want to use message embeds in discord.
 // Usually, if ur not using embeds or need discord.js dependecy. just remove this line above
 module.exports = {
   name: "add",
@@ -17,7 +17,7 @@ module.exports = {
         ":negative_squared_cross_mark: | Use numbers piece of shit"
       );
     }
-    const sum = new MessageEmbed() // Creates an embed
+    const sum = new EmbedBuilder() // Creates an embed
       .setTitle(`${num1} + ${num2} = ${num1 + num2}`)
       .setDescription(`Hey! Don't cheat in your homework!`)
       .setColor("#fdfd96")

@@ -1,5 +1,5 @@
 const genshin = require("genshin-db");
-const Discord = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
   name: "genshintalents",
@@ -12,9 +12,9 @@ module.exports = {
     const char2 = genshin.characters(input);
 
     try {
-      const embed = new Discord.MessageEmbed()
+      const embed = new EmbedBuilder()
         .setTitle(`${char.name}'s Talents'`)
-        .setColor("RANDOM")
+        .setColor("Random")
         .setThumbnail(char2.images.image)
         .addFields(
           { name: char.combat1.name, value: char.combat1.info, inline: true },

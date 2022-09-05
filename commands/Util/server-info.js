@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
   name: "server-info",
@@ -18,8 +18,8 @@ module.exports = {
       guildicon =
         "https://media.tenor.com/images/92c980587e63a2fd99ef92022264094d/tenor.png";
     }
-    const embed = new MessageEmbed()
-      .setColor("BLURPLE")
+    const embed = new EmbedBuilder()
+      .setColor("Blurple")
       .setAuthor(`Info for ${guildname}`, guildicon)
       .setTitle("📊 Server Info 📊")
       .setThumbnail(`${guildicon}`)

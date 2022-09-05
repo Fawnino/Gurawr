@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const superagent = require("superagent");
 
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
         .get("https://nekobot.xyz/api/image")
         .query({ type: "thigh" })
         .end((err, response) => {
-          const embed = new MessageEmbed()
+          const embed = new EmbedBuilder()
             .setTitle("Random Thighs")
             .setImage(response.body.message)
             .setTimestamp();

@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
   name: "clydify",
@@ -11,7 +11,7 @@ module.exports = {
     axios
       .get(`https://nekobot.xyz/api/imagegen?type=clyde&text=${args.join(" ")}`)
       .then((res) => {
-        const embed = new MessageEmbed().setImage(res.data.message);
+        const embed = new EmbedBuilder().setImage(res.data.message);
         message.channel.send({ embeds: [embed] });
       });
   },

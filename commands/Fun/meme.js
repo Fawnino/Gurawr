@@ -1,17 +1,17 @@
 const fetch = require("reddit-fetcher.js");
-const Discord = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 module.exports = {
   name: "meme",
   description: "Meme command to retrieve memes",
   async execute(message, args, client) {
     const data = await fetch("memes");
 
-    const embed = new Discord.MessageEmbed()
+    const embed = new EmbedBuilder()
       .setTitle(data.title || "No Title For This Post")
       .setImage(data.image)
       .setURL(data.url)
       .addField("Upvotes", `${data.upVotes}`)
-      .setColor("RANDOM");
+      .setColor("Random");
 
     return message.channel.send({ embeds: [embed] });
   },

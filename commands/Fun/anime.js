@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const malScraper = require("mal-scraper");
 
 module.exports = {
@@ -15,12 +15,12 @@ module.exports = {
       if (!query) return message.reply("Please add a search query!");
 
       malScraper.getInfoFromName(query).then((data) => {
-        const malEmbed = new Discord.MessageEmbed()
+        const malEmbed = new EmbedBuilder()
           .setAuthor(
             `My Anime List search result for ${args}`.split(",").join(" ")
           )
           .setThumbnail(data.picture)
-          .setColor("RANDOM")
+          .setColor("Random")
           .addField("Premiered", `\`${data.premiered}\``, true)
           .addField("Broadcast", `\`${data.broadcast}\``, true)
           .addField("Genres", `\`${data.genres}\``, true)

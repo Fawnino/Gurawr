@@ -1,6 +1,6 @@
 const { prefix } = require("../../config.json");
 // Deconstructing EmbedBuilder to create embeds within this command
-const { ChannelType, MessageEmbed } = require("discord.js");
+const { ChannelType, EmbedBuilder } = require("discord.js");
 
 /**
  * @type {import('../../typings').LegacyCommand}
@@ -23,8 +23,8 @@ module.exports = {
        * @description Help command embed object
        */
 
-      let helpEmbed = new MessageEmbed()
-        .setColor("RANDOM")
+      let helpEmbed = new EmbedBuilder()
+        .setColor("Random")
         .setTitle("List of all my commands")
         .setDescription(
           "```" + commands.map((command) => command.name).join(", ") + "```"
@@ -87,8 +87,8 @@ module.exports = {
      * @description Embed of Help command for a specific command.
      */
 
-    let commandEmbed = new MessageEmbed()
-      .setColor("RANDOM")
+    let commandEmbed = new EmbedBuilder()
+      .setColor("Random")
       .setTitle("Command Help");
 
     if (command.description)

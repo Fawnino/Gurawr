@@ -1,24 +1,38 @@
 /**
  * @file Main File of the bot, responsible for registering events, commands, interactions etc.
  * @author Naman Vrati
- * @version 3.0.0
+ * @since 1.0.0
+ * @version 3.3.0
  */
 
 // Declare constants which will be used throughout the bot.
 
 const fs = require("fs");
-const { Client, Collection, Intents, MessageEmbed } = require("discord.js");
+const {
+	Client,
+	Collection,
+	GatewayIntentBits,
+	Partials,
+} = require("discord.js");
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
-const { client_id, test_guild_id, token } = require("./config.json");
+const { token, client_id, test_guild_id } = require("./config.json");
 
 /**
  * From v13, specifying the intents is compulsory.
- * @type {Object}
+ * @type {import('./typings').Client}
  * @description Main Application Client */
 
+// @ts-ignore
 const client = new Client({
-  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+	// Please add all intents you need, more detailed information @ https://ziad87.net/intents/
+	intents: [
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.DirectMessages,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.MessageContent,
+	],
+	partials: [Partials.Channel],
 });
 
 /**********************************************************************/
@@ -30,20 +44,20 @@ const client = new Client({
  */
 
 const eventFiles = fs
-  .readdirSync("./events")
-  .filter((file) => file.endsWith(".js"));
+	.readdirSync("./events")
+	.filter((file) => file.endsWith(".js"));
 
 // Loop through all files and execute the event when it is actually emmited.
 for (const file of eventFiles) {
-  const event = require(`./events/${file}`);
-  if (event.once) {
-    client.once(event.name, (...args) => event.execute(...args, client));
-  } else {
-    client.on(
-      event.name,
-      async (...args) => await event.execute(...args, client)
-    );
-  }
+	const event = require(`./events/${file}`);
+	if (event.once) {
+		client.once(event.name, (...args) => event.execute(...args, client));
+	} else {
+		client.on(
+			event.name,
+			async (...args) => await event.execute(...args, client)
+		);
+	}
 }
 
 /**********************************************************************/
@@ -54,11 +68,13 @@ client.slashCommands = new Collection();
 client.buttonCommands = new Collection();
 client.selectCommands = new Collection();
 client.contextCommands = new Collection();
+client.modalCommands = new Collection();
 client.cooldowns = new Collection();
+client.autocompleteInteractions = new Collection();
 client.triggers = new Collection();
 
 /**********************************************************************/
-// Registration of Message-Based Commands
+// Registration of Message-Based Legacy Commands.
 
 /**
  * @type {String[]}
@@ -70,13 +86,13 @@ const commandFolders = fs.readdirSync("./commands");
 // Loop through all files and store commands in commands collection.
 
 for (const folder of commandFolders) {
-  const commandFiles = fs
-    .readdirSync(`./commands/${folder}`)
-    .filter((file) => file.endsWith(".js"));
-  for (const file of commandFiles) {
-    const command = require(`./commands/${folder}/${file}`);
-    client.commands.set(command.name, command);
-  }
+	const commandFiles = fs
+		.readdirSync(`./commands/${folder}`)
+		.filter((file) => file.endsWith(".js"));
+	for (const file of commandFiles) {
+		const command = require(`./commands/${folder}/${file}`);
+		client.commands.set(command.name, command);
+	}
 }
 
 /**********************************************************************/
@@ -92,14 +108,37 @@ const slashCommands = fs.readdirSync("./interactions/slash");
 // Loop through all files and store slash-commands in slashCommands collection.
 
 for (const module of slashCommands) {
-  const commandFiles = fs
-    .readdirSync(`./interactions/slash/${module}`)
-    .filter((file) => file.endsWith(".js"));
+	const commandFiles = fs
+		.readdirSync(`./interactions/slash/${module}`)
+		.filter((file) => file.endsWith(".js"));
 
-  for (const commandFile of commandFiles) {
-    const command = require(`./interactions/slash/${module}/${commandFile}`);
-    client.slashCommands.set(command.data.name, command);
-  }
+	for (const commandFile of commandFiles) {
+		const command = require(`./interactions/slash/${module}/${commandFile}`);
+		client.slashCommands.set(command.data.name, command);
+	}
+}
+
+/**********************************************************************/
+// Registration of Autocomplete Interactions.
+
+/**
+ * @type {String[]}
+ * @description All autocomplete interactions.
+ */
+
+const autocompleteInteractions = fs.readdirSync("./interactions/autocomplete");
+
+// Loop through all files and store autocomplete interactions in autocompleteInteractions collection.
+
+for (const module of autocompleteInteractions) {
+	const files = fs
+		.readdirSync(`./interactions/autocomplete/${module}`)
+		.filter((file) => file.endsWith(".js"));
+
+	for (const interactionFile of files) {
+		const interaction = require(`./interactions/autocomplete/${module}/${interactionFile}`);
+		client.autocompleteInteractions.set(interaction.name, interaction);
+	}
 }
 
 /**********************************************************************/
@@ -112,17 +151,17 @@ for (const module of slashCommands) {
 
 const contextMenus = fs.readdirSync("./interactions/context-menus");
 
-// Loop through all files and store slash-commands in slashCommands collection.
+// Loop through all files and store context-menus in contextMenus collection.
 
 for (const folder of contextMenus) {
-  const files = fs
-    .readdirSync(`./interactions/context-menus/${folder}`)
-    .filter((file) => file.endsWith(".js"));
-  for (const file of files) {
-    const menu = require(`./interactions/context-menus/${folder}/${file}`);
-    const keyName = `${folder.toUpperCase()} ${menu.data.name}`;
-    client.contextCommands.set(keyName, menu);
-  }
+	const files = fs
+		.readdirSync(`./interactions/context-menus/${folder}`)
+		.filter((file) => file.endsWith(".js"));
+	for (const file of files) {
+		const menu = require(`./interactions/context-menus/${folder}/${file}`);
+		const keyName = `${folder.toUpperCase()} ${menu.data.name}`;
+		client.contextCommands.set(keyName, menu);
+	}
 }
 
 /**********************************************************************/
@@ -138,14 +177,37 @@ const buttonCommands = fs.readdirSync("./interactions/buttons");
 // Loop through all files and store button-commands in buttonCommands collection.
 
 for (const module of buttonCommands) {
-  const commandFiles = fs
-    .readdirSync(`./interactions/buttons/${module}`)
-    .filter((file) => file.endsWith(".js"));
+	const commandFiles = fs
+		.readdirSync(`./interactions/buttons/${module}`)
+		.filter((file) => file.endsWith(".js"));
 
-  for (const commandFile of commandFiles) {
-    const command = require(`./interactions/buttons/${module}/${commandFile}`);
-    client.buttonCommands.set(command.id, command);
-  }
+	for (const commandFile of commandFiles) {
+		const command = require(`./interactions/buttons/${module}/${commandFile}`);
+		client.buttonCommands.set(command.id, command);
+	}
+}
+
+/**********************************************************************/
+// Registration of Modal-Command Interactions.
+
+/**
+ * @type {String[]}
+ * @description All modal commands.
+ */
+
+const modalCommands = fs.readdirSync("./interactions/modals");
+
+// Loop through all files and store modal-commands in modalCommands collection.
+
+for (const module of modalCommands) {
+	const commandFiles = fs
+		.readdirSync(`./interactions/modals/${module}`)
+		.filter((file) => file.endsWith(".js"));
+
+	for (const commandFile of commandFiles) {
+		const command = require(`./interactions/modals/${module}/${commandFile}`);
+		client.modalCommands.set(command.id, command);
+	}
 }
 
 /**********************************************************************/
@@ -158,16 +220,16 @@ for (const module of buttonCommands) {
 
 const selectMenus = fs.readdirSync("./interactions/select-menus");
 
-// Loop through all files and store select-menus in slashCommands collection.
+// Loop through all files and store select-menus in selectMenus collection.
 
 for (const module of selectMenus) {
-  const commandFiles = fs
-    .readdirSync(`./interactions/select-menus/${module}`)
-    .filter((file) => file.endsWith(".js"));
-  for (const commandFile of commandFiles) {
-    const command = require(`./interactions/select-menus/${module}/${commandFile}`);
-    client.selectCommands.set(command.id, command);
-  }
+	const commandFiles = fs
+		.readdirSync(`./interactions/select-menus/${module}`)
+		.filter((file) => file.endsWith(".js"));
+	for (const commandFile of commandFiles) {
+		const command = require(`./interactions/select-menus/${module}/${commandFile}`);
+		client.selectCommands.set(command.id, command);
+	}
 }
 
 /**********************************************************************/
@@ -176,33 +238,39 @@ for (const module of selectMenus) {
 const rest = new REST({ version: "9" }).setToken(token);
 
 const commandJsonData = [
-  ...Array.from(client.slashCommands.values()).map((c) => c.data.toJSON()),
-  ...Array.from(client.contextCommands.values()).map((c) => c.data),
+	...Array.from(client.slashCommands.values()).map((c) => c.data.toJSON()),
+	...Array.from(client.contextCommands.values()).map((c) => c.data),
 ];
 
 (async () => {
-  try {
-    console.log("Started refreshing application (/) commands.");
+	try {
+		console.log("Started refreshing application (/) commands.");
 
-    await rest.put(
-      /**
-       * Here we are sending to discord our slash commands to be registered.
-          There are 2 types of commands, guild commands and global commands.
-          Guild commands are for specific guilds and global ones are for all.
-          In development, you should use guild commands as guild commands update
-          instantly, whereas global commands take upto 1 hour to be published. To
-          deploy commands globally, replace the line below with:
-        Routes.applicationCommands(client_id)
-       */
+		await rest.put(
+			/**
+			 * By default, you will be using guild commands during development.
+			 * Once you are done and ready to use global commands (which have 1 hour cache time),
+			 * 1. Please uncomment the below (commented) line to deploy global commands.
+			 * 2. Please comment the below (uncommented) line (for guild commands).
+			 */
 
-      Routes.applicationGuildCommands(client_id, test_guild_id),
-      { body: commandJsonData }
-    );
+			Routes.applicationGuildCommands(client_id, test_guild_id),
 
-    console.log("Successfully reloaded application (/) commands.");
-  } catch (error) {
-    console.error(error);
-  }
+			/**
+			 * Good advice for global commands, you need to execute them only once to update
+			 * your commands to the Discord API. Please comment it again after running the bot once
+			 * to ensure they don't get re-deployed on the next restart.
+			 */
+
+			// Routes.applicationCommands(client_id)
+
+			{ body: commandJsonData }
+		);
+
+		console.log("Successfully reloaded application (/) commands.");
+	} catch (error) {
+		console.error(error);
+	}
 })();
 
 /**********************************************************************/
@@ -215,16 +283,18 @@ const commandJsonData = [
 
 const triggerFolders = fs.readdirSync("./triggers");
 
-// Loop through all files and store commands in commands collection.
+// Loop through all files and store triggers in triggers collection.
 
 for (const folder of triggerFolders) {
-  const triggerFiles = fs
-    .readdirSync(`./triggers/${folder}`)
-    .filter((file) => file.endsWith(".js"));
-  for (const file of triggerFiles) {
-    const trigger = require(`./triggers/${folder}/${file}`);
-    client.triggers.set(trigger.name, trigger);
-  }
+	const triggerFiles = fs
+		.readdirSync(`./triggers/${folder}`)
+		.filter((file) => file.endsWith(".js"));
+	for (const file of triggerFiles) {
+		const trigger = require(`./triggers/${folder}/${file}`);
+		client.triggers.set(trigger.name, trigger);
+	}
 }
+
+// Login into your client application with bot's token.
 
 client.login(token);

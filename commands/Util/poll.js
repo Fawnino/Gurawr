@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
   name: "poll",
@@ -9,7 +9,7 @@ module.exports = {
   async execute(message, args, client) {
     const sayMessage = args.join(" ");
     message.delete().catch((err) => console.log(err));
-    let embed = new MessageEmbed()
+    let embed = new EmbedBuilder()
       .setColor("#FFFFF")
       .setAuthor(
         message.author.username,

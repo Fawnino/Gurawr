@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const { Random } = require("something-random-on-discord");
 const anime = require("anime-actions");
 
@@ -10,7 +10,7 @@ module.exports = {
     try {
       let data = await Random.getAnimeImgURL("waifu");
 
-      let embed = new Discord.MessageEmbed()
+      let embed = new EmbedBuilder()
         .setImage(data)
         .setColor("#2F3136")
         .setTitle(`Here is your random Waifu!\ 💖`)

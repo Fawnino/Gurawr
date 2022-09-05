@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
   name: "ping",
@@ -6,7 +6,7 @@ module.exports = {
   cooldown: 3,
   aliases: ["test"],
   execute(message) {
-    const pingEmbed = new MessageEmbed()
+    const pingEmbed = new EmbedBuilder()
       .setColor("#CCCC00")
       .setTitle("🏓Pong!")
       .setDescription(

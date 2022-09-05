@@ -1,4 +1,4 @@
-const { Client, Message, MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 const Pokedex = require("pokedex-promise-v2"),
   pokedex = new Pokedex();
@@ -65,7 +65,7 @@ module.exports = {
       var weight = `${Math.floor(pokemon.weight / 10)} (kg)`;
       var n = pokemon.moves.length;
 
-      const embed = new MessageEmbed()
+      const embed = new EmbedBuilder()
         .setAuthor({
           name: capitalize(pokemon.name),
           iconURL:

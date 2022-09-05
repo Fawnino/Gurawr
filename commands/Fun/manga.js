@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const kitsu = require("node-kitsu");
 
 module.exports = {
@@ -76,10 +76,10 @@ module.exports = {
         var statusUpper =
           status.charAt(0).toUpperCase() + status.substr(1).toLowerCase();
 
-        const embed = new Discord.MessageEmbed()
+        const embed = new EmbedBuilder()
           .setTitle(`${title}`)
           .setAuthor("Okaru", "https://i.imgur.com/Jf765y4.png")
-          .setColor("RANDOM")
+          .setColor("Random")
           .setDescription("Status: " + statusUpper)
           .setFooter(
             "Info brought to you by Kitsu.io & The Okaru Bot ©2018 iPwNix",

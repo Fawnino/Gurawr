@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
   name: "coinflip",
@@ -7,7 +7,7 @@ module.exports = {
   cooldown: 3,
   async execute(message, client) {
     setTimeout(() => {
-      const result = new MessageEmbed()
+      const result = new EmbedBuilder()
         .setColor("GREEN")
         .setTitle(`${Math.floor(Math.random() * 2) === 1 ? "Head" : "Tail"}`)
         .setDescription("If you won Congrats!");

@@ -1,10 +1,10 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
   name: "gurainfo",
   description: "Get Info about Gura Bot",
   async execute(message, args, client) {
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setTitle("Wanna get to know me more?")
       .setDescription(
         "Hello! I'm Gura, a multipurpose Discord Bot that can provide you with lots and lots of Information and can entertain!"

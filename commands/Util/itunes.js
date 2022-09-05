@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const request = require("node-superfetch");
 module.exports = {
   name: "itunes",
@@ -25,7 +25,7 @@ module.exports = {
       if (price === undefined) {
         price = 0;
       }
-      const embed = new MessageEmbed()
+      const embed = new EmbedBuilder()
         .setColor("4169e1")
         .setAuthor(
           "iTunes",

@@ -1,5 +1,5 @@
 const genshin = require("genshin-db");
-const Discord = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
   name: "genshinconst",
@@ -13,10 +13,10 @@ module.exports = {
     const char2 = genshin.characters(input);
 
     try {
-      const embed = new Discord.MessageEmbed()
+      const embed = new EmbedBuilder()
         .setTitle(`${char.name}'s Constellations`)
         .setThumbnail(char2.images.image)
-        .setColor("RANDOM")
+        .setColor("Random")
         .addFields(
           {
             name: `Constellation 1: ${char.c1.name}`,

@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const os = require("os");
 
 module.exports = {
@@ -6,7 +6,7 @@ module.exports = {
   aliases: ["serverstats", "stats"],
   description: "Sends the server stats",
   async execute(message, args, client) {
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setColor("RED")
       .setTitle("Current Server Specs")
       .addFields([

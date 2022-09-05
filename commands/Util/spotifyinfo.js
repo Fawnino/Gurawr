@@ -1,5 +1,5 @@
 const axios = require("axios");
-const Discord = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
   name: "spotifyinfo",
@@ -22,10 +22,10 @@ module.exports = {
 
       const info = data.data;
 
-      const embed = new Discord.MessageEmbed()
+      const embed = new EmbedBuilder()
         .setTitle(info.title)
         .setURL(info.link)
-        .setColor("RANDOM")
+        .setColor("Random")
         .addField("Artist", info.artist, true)
         .addField("Release Date", info.release, true)
         .addField(

@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
   name: "reverse",
@@ -9,7 +9,7 @@ module.exports = {
     if (!text) return message.channel.send("Please provide text to reverse");
 
     let newtext = text.split("").reverse().join("");
-    const embed = new Discord.MessageEmbed()
+    const embed = new EmbedBuilder()
       .setTitle("Word Reverse")
       .addFields(
         { name: `Original Text`, value: `\`\`\`${text}\`\`\``, inline: true },
@@ -19,7 +19,7 @@ module.exports = {
           inline: false,
         }
       )
-      .setColor("RANDOM")
+      .setColor("Random")
       .setTimestamp();
 
     return message.channel.send({ embeds: [embed] });

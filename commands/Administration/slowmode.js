@@ -1,5 +1,5 @@
-const { Client, Message, MessageEmbed } = require("discord.js");
 const ms = require("ms");
+
 module.exports = {
   name: "slowmode",
   description: "enables slowmode in a channel",

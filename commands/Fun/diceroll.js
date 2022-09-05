@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 module.exports = {
   name: "diceroll",
   aliases: ["dice", "rolldice"],
@@ -6,9 +6,9 @@ module.exports = {
   execute(message, args, client) {
     const list = ["1", "2", "3", "4", "5", "6"];
     const rand = list[Math.floor(Math.random() * list.length)];
-    let newEmbed = new MessageEmbed()
+    let newEmbed = new EmbedBuilder()
       .setTitle("🎲 Dice Roll!")
-      .setColor("RANDOM")
+      .setColor("Random")
       .setDescription(`You rolled a **${rand}**!`)
       .setTimestamp();
     message.channel.send({ embeds: [newEmbed] });

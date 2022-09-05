@@ -1,4 +1,4 @@
-const { Client, Message, MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const axios = require("axios");
 
 module.exports = {
@@ -22,10 +22,10 @@ module.exports = {
       );
       const [answer] = list;
 
-      const embed = new MessageEmbed()
+      const embed = new EmbedBuilder()
         .setTitle(answer.word)
         .setURL(answer.permalink)
-        .setColor("RANDOM")
+        .setColor("Random")
         .addField("DEFINITION", trim(answer.definition))
         .addField("EXAMPLE", trim(answer.example))
         .addField(

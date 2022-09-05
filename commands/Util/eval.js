@@ -1,15 +1,15 @@
-const { Client, Message, MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const Discord = require("discord.js");
 module.exports = {
   name: "eval",
   description: "Eval Command",
   ownerOnly: true,
   async execute(message, args, client) {
-    const embed = new MessageEmbed().setTitle("Evaluating...");
+    const embed = new EmbedBuilder().setTitle("Evaluating...");
     const msg = await message.channel.send({ embeds: [embed] });
     try {
       const data = eval(args.join(" ").replace(/```/g, ""));
-      const embed = new MessageEmbed()
+      const embed = new EmbedBuilder()
         .setTitle("Output: ")
         .setDescription("```await data```");
       await msg.edit(embed);
@@ -31,7 +31,7 @@ module.exports = {
         });
       });
     } catch (e) {
-      const embed = new MessageEmbed().setTitle("An Error has occured");
+      const embed = new EmbedBuilder().setTitle("An Error has occured");
       return await msg.edit(embed);
     }
   },

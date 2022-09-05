@@ -1,4 +1,4 @@
-const { Client, Message, MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
   name: "ban",
@@ -23,7 +23,7 @@ module.exports = {
 
     const reason = args.slice(1).join(" ") || "No Reason";
 
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setTitle(`User banned`)
       .setDescription(`Reason: ${reason}`)
       .setTimestamp()

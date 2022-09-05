@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
@@ -32,15 +32,15 @@ module.exports = {
       const rand = list[Math.floor(Math.random() * list.length)];
 
       if (gayrate >= 70) {
-        let embed = new Discord.MessageEmbed()
+        let embed = new EmbedBuilder()
           .setTitle("Pp Machine")
           .setColor("#000000")
           .setDescription(`${member.username} has a ${rand} pp`);
         message.channel.send({ embeds: [embed] });
       } else {
-        let embed = new Discord.MessageEmbed()
+        let embed = new EmbedBuilder()
           .setTitle("Pp Machine")
-          .setColor("RANDOM")
+          .setColor("Random")
           .setDescription(`${member.username} has a ${rand} pp`);
 
         message.channel.send({ embeds: [embed] });

@@ -1,5 +1,5 @@
 const genshin = require("genshin-db");
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
   name: "genshinchar",
@@ -13,10 +13,10 @@ module.exports = {
     const char = genshin.characters(input);
 
     try {
-      const embed = new MessageEmbed()
+      const embed = new EmbedBuilder()
         .setTitle(`**${char.name}**`)
         .setThumbnail(char.images.icon)
-        .setColor("RANDOM")
+        .setColor("Random")
         .addFields(
           { name: "Titles:", value: char.title, inline: false },
           { name: "Element:", value: char.element, inline: false },

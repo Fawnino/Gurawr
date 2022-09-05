@@ -1,4 +1,4 @@
-const Discord = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 const fetch = (args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(args));
 
@@ -19,7 +19,7 @@ module.exports = {
       ).then((response) => (image = response.url));
 
       if (gayrate >= 70) {
-        let embed = new Discord.MessageEmbed()
+        let embed = new EmbedBuilder()
           .setTitle("Gayrate Machine")
           .setColor("#000000")
           .setImage(image)
@@ -27,9 +27,9 @@ module.exports = {
 
         message.channel.send({ embeds: [embed] });
       } else {
-        let embed = new Discord.MessageEmbed()
+        let embed = new EmbedBuilder()
           .setTitle("Gayrate Machine")
-          .setColor("RANDOM")
+          .setColor("Random")
           .setDescription(`${member.username} is \`${gayrate}%\` gay 🏳️‍🌈`);
 
         message.channel.send({ embeds: [embed] });

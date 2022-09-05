@@ -1,4 +1,4 @@
-const { MessageEmbed } = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
   name: "avatar",
@@ -7,12 +7,12 @@ module.exports = {
   usage: "(user)",
   async execute(message) {
     const avatar = message.mentions.users.first();
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setAuthor(
         message.member.displayName,
         message.member.user.displayAvatarURL()
       )
-      .setColor("RANDOM")
+      .setColor("Random")
       .setTitle(`**Here's the avatar of ${message.member.displayName}!**`)
       .setImage(
         message.author.displayAvatarURL({
@@ -24,12 +24,12 @@ module.exports = {
       .setTimestamp();
     if (!avatar) return message.channel.send({ embeds: [embed] });
     else if (avatar) {
-      const embed2 = new MessageEmbed()
+      const embed2 = new EmbedBuilder()
         .setAuthor(
           message.member.displayName,
           message.member.user.displayAvatarURL()
         )
-        .setColor("RANDOM")
+        .setColor("Random")
         .setTitle(`**Here's the avatar of ${avatar.username}!**`)
         .setImage(
           avatar.displayAvatarURL({ dynamic: true, format: "png", size: 512 })

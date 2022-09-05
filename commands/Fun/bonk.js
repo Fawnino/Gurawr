@@ -1,5 +1,5 @@
 const anime = require("anime-actions");
-const Discord = require("discord.js");
+const { EmbedBuilder } = require("discord.js");
 
 module.exports = {
   name: "bonk",
@@ -18,9 +18,9 @@ module.exports = {
 
       let data = await anime.bonk();
 
-      let embed = new Discord.MessageEmbed()
+      let embed = new EmbedBuilder()
         .setImage(data)
-        .setColor("#2F3136")
+        .setColor(0x2f3136)
         .setTitle(`${message.author.username} bonks ${user.user.username}`)
         .setTimestamp();
 
