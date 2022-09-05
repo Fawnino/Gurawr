@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, ActivityType } = require("discord.js");
 const { version } = require("../package.json");
 const { channelOnlineMessage } = require("../config.json");
 /**
@@ -26,7 +26,7 @@ module.exports = {
 		setInterval(
 			() =>
 				client.user.setActivity(activities[i++ % activities.length], {
-					type: "PLAYING",
+					Type: ActivityType.Playing,
 				}),
 			15000
 		);

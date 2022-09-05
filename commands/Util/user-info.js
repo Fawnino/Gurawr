@@ -31,7 +31,7 @@ module.exports = {
 			const embed = new EmbedBuilder()
 				.setTitle(`${user.username}'s Info`)
 				.setColor(displayHexColor)
-				.setFooter(`ID: ${id}`)
+				.setFooter({ text: `ID: ${id}` })
 				.setThumbnail(thumbnail)
 				.setTimestamp()
 				.addFields(

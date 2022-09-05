@@ -1,7 +1,7 @@
 {
-	"name": "discordbot-template",
-	"version": "3.3.0",
-	"description": "A modified template based on discordjs.guide to create your own discord-js based bot!",
+	"name": "gura",
+	"version": "1.2.1",
+	"description": "A fun multipurpose discord bot!",
 	"funding": "https://ko-fi.com/namanvrati",
 	"types": "./typings.d.ts",
 	"main": "index.js",
