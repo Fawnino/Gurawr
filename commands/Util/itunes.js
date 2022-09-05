@@ -26,7 +26,7 @@ module.exports = {
 				price = 0;
 			}
 			const embed = new EmbedBuilder()
-				.setColor("4169e1")
+				.setColor(0x4169e1)
 				.setAuthor({
 					name: "iTunes",
 					iconURL: "https://i.imgur.com/PR29ow0.jpg",
@@ -35,16 +35,22 @@ module.exports = {
 				.setURL(data.trackViewUrl)
 				.setThumbnail(data.artworkUrl100)
 				.setTitle(data.trackName)
-				.addField("Artist", data.artistName, true)
-				.addField("Album", data.collectionName, true)
-				.addField(
-					"Release Date",
-					new Date(data.releaseDate).toDateString(),
-					true
-				)
-				.addField("Price", "$" + price, true)
-				.addField("Length", data.trackTimeMillis / 1000 + "s", true)
-				.addField("Genre", data.primaryGenreName, true);
+				.addFields(
+					{ name: "Artist", value: `${data.artistName}`, inline: true },
+					{ name: "Album", value: `${data.collectionName}`, inline: true },
+					{
+						name: "Release Date",
+						value: `${new Date(data.releaseDate).toDateString()}`,
+						inline: true,
+					},
+					{ name: "Price", value: "$" + price, inline: true },
+					{
+						name: "Length",
+						value: `${data.trackTimeMillis / 1000 + "s"}`,
+						inline: true,
+					},
+					{ name: "Genre", value: `${data.primaryGenreName}`, inline: true }
+				);
 			return message.channel.send({ embeds: [embed] });
 		} catch (err) {
 			if (err.status === 404)
