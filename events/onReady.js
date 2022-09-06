@@ -9,8 +9,7 @@ module.exports = {
 	name: "ready",
 	once: true,
 	execute(client) {
-		console.log(`Client has successfully booted-up! In ${client.guilds.cache.size} servers with ${client.users.cache.size} users!
-    A check will be performed in the Discord Server to ensure that it's running properly.`);
+		console.log(`🥳 | Ready and Logged in as ${client.user.tag}!`);
 
 		const guild = client.guilds.cache.get("1011104283237830758");
 		const channel = guild.channels.cache.get("1014471400658051102");
