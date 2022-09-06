@@ -6,7 +6,7 @@ const path = require("path"); // Import path
 const bodyParser = require("body-parser"); // Import body-parser
 const fetch = (...args) =>
 	import("node-fetch").then(({ default: fetch }) => fetch(...args)); // Import node-fetch asynchronously; see https://www.npmjs.com/package/node-fetch#installation for more info on why this is done.
-const { client_id, client_secret } = require("./config.json");
+const { client_id, client_secret } = require("../config.json");
 /* Client Variables */
 
 /* Define app variables */

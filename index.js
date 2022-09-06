@@ -17,7 +17,7 @@ const {
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
 const { token, client_id, test_guild_id } = require("./config.json");
-const serverport = require("./server");
+const serverport = require("./Oauth2/server");
 
 /**
  * From v13, specifying the intents is compulsory.
