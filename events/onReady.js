@@ -1,6 +1,5 @@
 const { EmbedBuilder, ActivityType } = require("discord.js");
 const { version } = require("../package.json");
-const { channelOnlineMessage } = require("../config.json");
 /**
  * @file Ready Event File.
  * @author Naman Vrati

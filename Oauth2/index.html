@@ -2,7 +2,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>Discord OAUTH</title>
-
+		<body style="background-color: burlywood"></body>
 		<style>
 			* {
 				text-align: center;
@@ -10,11 +10,22 @@
 			}
 
 			#welcome_txt {
-				font-size: 24px;
+				font-size: 32px;
+				color: black;
 			}
 
 			#login-link {
-				background-color: whitesmoke;
+				background-color: brown;
+				border-radius: 8px;
+				color: black;
+				padding: 15px 30px;
+				text-align: center;
+				text-decoration: none;
+				display: inline-block;
+				font-size: 20px;
+			}
+			#number-guessing-game {
+				background-color: brown;
 				border-radius: 8px;
 				color: black;
 				padding: 15px 30px;
@@ -36,7 +47,9 @@
 			id="login-link"
 			href="https://discord.com/api/oauth2/authorize?client_id=885002893671927848&redirect_uri=http%3A%2F%2Flocalhost%3A3000&response_type=code&scope=identify"
 			>Login with Discord</a
-		><br /><br />
+		><br /><br /><a id="number-guessing-game" href="guessthenumber.html"
+			>Redirect to the Number Guessing Game</a
+		><br />
 		<!-- Be sure to paste your discord oauth2 link from the dev portal! -->
 		<p id="welcome_txt"></p>
 
